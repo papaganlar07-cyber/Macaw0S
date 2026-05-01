@@ -1,21 +1,34 @@
-            - isim: Arch tabanlı OSTree ISO'su oluşturma
-  # Tam commit'e veya sürüme sabitleyebilirsiniz.
-  # uses: ImmutableArch/arch-container-installer-builder@75855132df14e20188cb7c16d735b856c92d96a7
-  uses: ImmutableArch/arch-container-installer-builder@0.1.1
-  ile:
-    # airootfs/ dizinine birleştirilecek ek dosyalar/dizinler
-    rootfs-path: # isteğe bağlı, varsayılan değer
-    # Yüklenecek ek paketler
-    özel paketler: # isteğe bağlı, varsayılan değer
-    # Ek pacman depoları
-    ekstra-depolar: # isteğe bağlı, varsayılan değer
-    # Özel profiledef.sh dosyasının tam yolunu
-    özel-profil-tanımı: # isteğe bağlı, varsayılan değer
-    # Özel GRUB teması/yapılandırma dosyalarını içeren klasör
-    custom-grub: # isteğe bağlı, varsayılan değer
-    # Özel syslinux dosyalarını içeren klasör
-    özel-syslinux: # isteğe bağlı, varsayılan değer
-    # Oluşturulan ISO dosyasını nereye kaydedeceğim?
-    çıktı dizini: # isteğe bağlı, varsayılan değer "out"tur
+name: Macaw0S ISO Build
 
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+      options: --privileged
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Build Tools
+        run: |
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm archiso mkinitcpio
+
+      - name: Build Macaw0S ISO
+        run: |
+          # Senin dosya yapındaki script'i çalıştırıyoruz
+          chmod +x ./scripts/build-iso.sh
+          ./scripts/build-iso.sh
+        
+      - name: Upload ISO Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Macaw0S-Alpha-ISO
+          path: out/*.iso
           
