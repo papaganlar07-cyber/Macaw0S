@@ -1,15 +1,13 @@
-# Core
 base
 linux
 linux-firmware
 mkinitcpio
 
-# Bootloaders (required)
 grub
 efibootmgr
 syslinux
+memtest86+
 
-# Live utilities
 networkmanager
 sudo
 vim
