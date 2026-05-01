@@ -1,16 +1,15 @@
-# Core system
+# Core
 base
 linux
 linux-firmware
 mkinitcpio
 
-# Bootloader stack for ArchISO
+# Bootloaders (required)
 grub
 efibootmgr
 syslinux
-memtest86+
 
-# Live environment essentials
+# Live utilities
 networkmanager
 sudo
 vim
