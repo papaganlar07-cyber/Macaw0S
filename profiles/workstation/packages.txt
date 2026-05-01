@@ -12,3 +12,6 @@ git
 docker
 podman
 flatpak
+grub
+syslinux
+memtest86+
