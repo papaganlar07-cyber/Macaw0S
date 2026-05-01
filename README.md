@@ -1,27 +1,16 @@
 # Macaw0S
 
-Macaw0S, Arch Linux tabanlı, modern, profesyonel bir dağıtım oluşturma projesidir.
-Bu repo artık sadece iskelet değil, **ISO build pipeline** da içerir.
+Macaw0S is an advanced ArchISO-based Linux distribution project focused on speed, privacy, branding and developer experience.
 
-## Öne Çıkanlar
+## Features
+- Real ISO build pipeline
+- Custom branding and wallpapers
+- Performance tuned defaults
+- Security profile with firewall
+- Modern CLI tools
 
-- Profil tabanlı paket/servis sistemi (`workstation`, `professional`, `security`)
-- ArchISO ile gerçek `.iso` üretimi
-- Markalama (logo) uygulama scripti
-- Kurumsal ve güvenlik odaklı mimari dokümantasyonu
-
-## Hızlı Başlangıç
-
+## Quick Start
 ```bash
 chmod +x scripts/*.sh
-./scripts/bootstrap-dev-env.sh
-./scripts/build-profile.sh workstation
 ./scripts/build-iso.sh workstation
 ```
-
-ISO çıktısı `artifacts/` altına düşer.
-
-Detaylar:
-- Mimari: `docs/ARCHITECTURE.md`
-- Yol haritası: `docs/ROADMAP.md`
-- ISO build: `docs/BUILD_ISO.md`
