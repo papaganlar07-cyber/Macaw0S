@@ -1,0 +1,8 @@
+base
+linux-hardened
+networkmanager
+apparmor
+audit
+openscap
+lynis
+rkhunter
