@@ -7,7 +7,7 @@ iso_application="Macaw0S Live/Rescue ISO"
 iso_version="0.2.0"
 install_dir="arch"
 buildmodes=('iso')
-bootmodes=('bios.syslinux.mbr' 'uefi-ia32.grub.esp' 'uefi-x64.grub.esp' 'uefi-x64.systemd-boot.esp')
+bootmodes=bootmodes=('bios.syslinux' 'uefi.grub')
 arch='x86_64'
 pacman_conf="pacman.conf"
 airootfs_image_type="squashfs"
