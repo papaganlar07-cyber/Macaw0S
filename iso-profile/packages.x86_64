@@ -4,3 +4,7 @@ linux-firmware
 networkmanager
 vim
 sudo
+grub
+efibootmgr
+syslinux
+memtest86+
