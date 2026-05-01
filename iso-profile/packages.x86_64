@@ -1,0 +1,18 @@
+# Core system
+base
+linux
+linux-firmware
+mkinitcpio
+
+# Bootloader stack for ArchISO
+grub
+efibootmgr
+syslinux
+memtest86+
+
+# Live environment essentials
+networkmanager
+sudo
+vim
+nano
+less
