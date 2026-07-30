@@ -1,0 +1,18 @@
+set $mod Mod4
+set $term alacritty
+set $menu nest-launcher --show
+
+font pango:Inter 10
+floating_modifier $mod
+
+bindsym $mod+Return exec $term
+bindsym $mod+space exec $menu
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+r reload
+
+exec wing-panel
+exec perch-dock
+exec swaybg -i /usr/local/share/backgrounds/macaw0s/aviary-default.png -m fill
+
+client.focused #2FD17C #0E2A27 #F2FFF8 #2FD17C #2FD17C
+client.unfocused #153A34 #071B1A #8CB7A9 #153A34 #153A34

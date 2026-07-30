@@ -11,6 +11,12 @@ required_files=(
   "compatibility/dos/README.md"
   "compatibility/dos/dosbox-x.conf"
   "compatibility/bsd/README.md"
+  "desktop/aviary-shell/README.md"
+  "desktop/aviary-shell/config/aviary-session.conf"
+  "desktop/aviary-shell/themes/macaw-dark/colors.conf"
+  "desktop/aviary-shell/themes/macaw-dark/style.css"
+  "freebsd-profile/usr/local/etc/xdg/wayfire/wayfire.ini"
+  "freebsd-profile/usr/local/etc/xdg/sway/config"
 )
 
 for file in "${required_files[@]}"; do

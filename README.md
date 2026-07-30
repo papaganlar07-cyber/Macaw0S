@@ -17,6 +17,15 @@ Macaw0S, FreeBSD kernelini birincil hedef alan, profesyonel ve kapalı kaynak ü
 - `scripts/`: Build, doğrulama ve yardımcı scriptler
 - `docs/`: Mimari, yol haritası ve FreeBSD geçiş planı
 
+
+## Masaüstü deneyimi
+
+Macaw0S'in özgün masaüstü deneyimi **Aviary Shell** olarak adlandırılır. Wayfire/Sway tabanlıdır, `WingPanel`, `NestLauncher`, `PerchDock` ve `FlightSwitcher` bileşenleriyle Mac kopyası olmayan, kendine has zümrüt-grafit görsel dil kullanır.
+
+- Masaüstü belgesi: `docs/DESKTOP_EXPERIENCE.md`
+- Tema ve oturum dosyaları: `desktop/aviary-shell/`
+- FreeBSD XDG örnekleri: `freebsd-profile/usr/local/etc/xdg/`
+
 ## Doğrulama
 
 ```bash
