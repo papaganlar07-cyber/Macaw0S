@@ -1,0 +1,22 @@
+# Build artifacts
+artifacts/*.iso
+artifacts/*.img
+artifacts/*.qcow2
+.mkarchiso-work/
+.build-*-packages.txt
+.build-*-services.txt
+
+# Local virtual machines and proprietary media
+*.iso
+*.img
+*.bin
+*.rom
+*.qcow2
+compatibility/dos/media/
+kernels/**/media/
+
+# OS/editor noise
+.DS_Store
+*.swp
+
+.stage/

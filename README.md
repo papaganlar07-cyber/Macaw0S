@@ -40,6 +40,15 @@ Macaw0S'in özgün masaüstü deneyimi **Aviary Shell** olarak adlandırılır. 
 
 Macaw0S henüz günlük ana sistem olarak bitmiş değildir; ama artık FreeBSD profil, Aviary Shell placeholder bileşenleri, post-install staging ve doğrulama scriptleriyle gerçek kullanılabilirliğe yaklaşan test edilebilir bir temel sunar. Detay: `docs/USABILITY_STATUS.md`.
 
+
+## Geliştirme komutları
+
+- `make validate`: tüm repo smoke checklerini çalıştırır.
+- `make stage-freebsd`: FreeBSD post-install ve Aviary Shell dosyalarını `.stage/macaw0s/` altına toplar.
+- `make clean`: geçici build/stage dosyalarını temizler.
+
+Detay: `docs/DEVELOPMENT_WORKFLOW.md` ve `docs/RELEASE_CHECKLIST.md`.
+
 ## Doğrulama
 
 ```bash

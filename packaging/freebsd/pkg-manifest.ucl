@@ -1,0 +1,12 @@
+name: "macaw0s-aviary-shell"
+version: "0.1.0"
+origin: "x11-wm/macaw0s-aviary-shell"
+comment: "Aviary Shell desktop assets for Macaw0S"
+www: "https://macaw0s.local"
+maintainer: "Macaw0S Team <dev@macaw0s.local>"
+prefix: "/usr/local"
+licenselogic: "single"
+licenses: ["BSD2CLAUSE"]
+desc: <<EOD
+Aviary Shell provides Macaw0S session defaults, theme assets, and development placeholders for the WingPanel, NestLauncher, and PerchDock components.
+EOD

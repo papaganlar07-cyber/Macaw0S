@@ -1,0 +1,21 @@
+name: Validate Macaw0S
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  repo-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run validation scripts
+        run: make validate
+
+      - name: Stage FreeBSD filesystem tree
+        run: make stage-freebsd
+
+      - name: Verify staged desktop executable
+        run: test -x .stage/macaw0s/usr/local/bin/wing-panel
