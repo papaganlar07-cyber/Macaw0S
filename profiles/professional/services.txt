@@ -1,0 +1,6 @@
+NetworkManager.service
+nftables.service
+fail2ban.service
+postgresql.service
+redis.service
+nginx.service

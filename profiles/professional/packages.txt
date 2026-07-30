@@ -1,0 +1,13 @@
+base
+linux-lts
+linux-firmware
+networkmanager
+nftables
+audit
+fail2ban
+clamav
+aide
+wireshark-qt
+postgresql
+redis
+nginx

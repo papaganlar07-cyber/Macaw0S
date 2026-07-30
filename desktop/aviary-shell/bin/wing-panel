@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+# Placeholder executable for the future native WingPanel.
+# Keeps sessions testable until the real panel is implemented.
+exec sh -c 'while :; do printf "Macaw0S WingPanel placeholder\n"; sleep 3600; done'

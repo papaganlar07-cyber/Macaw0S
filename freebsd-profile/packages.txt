@@ -1,0 +1,27 @@
+# Macaw0S FreeBSD userland packages
+sudo
+doas
+pkg
+bash
+zsh
+nano
+vim
+git
+curl
+rsync
+ca_root_nss
+xorg
+wayfire
+sway
+xfce
+firefox
+libreoffice
+podman
+docker
+qemu
+virtualbox-ose-nox11
+dosbox-x
+alacritty
+swaybg
+seatd
+dbus

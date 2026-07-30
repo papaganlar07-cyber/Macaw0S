@@ -1,0 +1,15 @@
+base
+linux
+linux-firmware
+mkinitcpio
+
+grub
+efibootmgr
+syslinux
+memtest86+
+
+networkmanager
+sudo
+vim
+nano
+less

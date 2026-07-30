@@ -1,0 +1,17 @@
+[name]
+id = "freebsd-core"
+display = "FreeBSD Core"
+role = "primary-workstation"
+license_family = "bsd-permissive"
+redistributable = true
+
+[features]
+zfs = true
+jails = true
+bhyve = true
+network_stack = "production"
+desktop = "aviary-shell"
+
+[boot]
+preferred = true
+loader = "freebsd-loader"

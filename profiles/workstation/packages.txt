@@ -1,0 +1,14 @@
+base
+linux
+linux-firmware
+networkmanager
+pipewire
+wireplumber
+mesa
+firefox
+libreoffice-fresh
+code
+git
+docker
+podman
+flatpak

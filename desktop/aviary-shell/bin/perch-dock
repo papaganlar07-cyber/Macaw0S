@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+# Placeholder executable for the future native PerchDock.
+exec sh -c 'while :; do printf "Macaw0S PerchDock placeholder\n"; sleep 3600; done'
