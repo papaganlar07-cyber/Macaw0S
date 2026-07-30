@@ -23,5 +23,8 @@ install_file "$REPO_ROOT/desktop/aviary-shell/bin/wing-panel" "usr/local/bin/win
 install_file "$REPO_ROOT/desktop/aviary-shell/bin/nest-launcher" "usr/local/bin/nest-launcher" 0755
 install_file "$REPO_ROOT/desktop/aviary-shell/bin/perch-dock" "usr/local/bin/perch-dock" 0755
 install_file "$REPO_ROOT/bin/macawctl" "usr/local/bin/macawctl" 0755
+install_file "$REPO_ROOT/apps/aaa-music/bin/aaa-music" "usr/local/bin/aaa-music" 0755
+install_file "$REPO_ROOT/apps/aaa-music/config/aaa-music.conf" "usr/local/share/macaw0s/aaa-music.conf"
+install_file "$REPO_ROOT/apps/aaa-music/share/applications/aaa-music.desktop" "usr/local/share/applications/aaa-music.desktop"
 
 printf '[Macaw0S] FreeBSD post-install files staged under %s\n' "$PREFIX"

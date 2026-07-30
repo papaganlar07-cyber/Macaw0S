@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=AAA Music
+Comment=Macaw0S lightweight music library and player
+Exec=aaa-music play
+Terminal=true
+Categories=Audio;Music;Player;
+StartupNotify=false

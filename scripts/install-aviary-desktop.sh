@@ -14,5 +14,8 @@ install -Dm755 "$ROOT_DIR/desktop/aviary-shell/bin/wing-panel" "$PREFIX/bin/wing
 install -Dm755 "$ROOT_DIR/desktop/aviary-shell/bin/nest-launcher" "$PREFIX/bin/nest-launcher"
 install -Dm755 "$ROOT_DIR/desktop/aviary-shell/bin/perch-dock" "$PREFIX/bin/perch-dock"
 install -Dm755 "$ROOT_DIR/bin/macawctl" "$PREFIX/bin/macawctl"
+install -Dm755 "$ROOT_DIR/apps/aaa-music/bin/aaa-music" "$PREFIX/bin/aaa-music"
+install -Dm644 "$ROOT_DIR/apps/aaa-music/config/aaa-music.conf" "$PREFIX/share/macaw0s/aaa-music.conf"
+install -Dm644 "$ROOT_DIR/apps/aaa-music/share/applications/aaa-music.desktop" "$PREFIX/share/applications/aaa-music.desktop"
 
 echo "[Macaw0S] Aviary Shell dosyaları kuruldu: $PREFIX"

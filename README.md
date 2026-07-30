@@ -42,6 +42,11 @@ Macaw0S henüz günlük ana sistem olarak bitmiş değildir; ama artık FreeBSD 
 
 
 
+
+## AAA Music
+
+Macaw0S artık günlük kullanım için hafif bir müzik uygulaması içerir: `apps/aaa-music/bin/aaa-music`. Müzik klasörünü tarar, playlist oluşturur ve `mpv` ile çalar. Detay: `docs/AAA_MUSIC.md`.
+
 ## macawctl kontrol aracı
 
 `bin/macawctl`, TriCore yönlendirmesini, Aviary favorilerini ve sistem durumunu kontrol etmek için eklenen hafif CLI aracıdır. Detay: `docs/MACAWCTL.md`.

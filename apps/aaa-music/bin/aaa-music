@@ -1,0 +1,64 @@
+#!/usr/bin/env sh
+set -eu
+
+MUSIC_DIR="${AAA_MUSIC_DIR:-$HOME/Music}"
+PLAYER="${AAA_MUSIC_PLAYER:-mpv}"
+PLAYLIST="${AAA_MUSIC_PLAYLIST:-$HOME/.local/share/macaw0s/aaa-music/playlist.m3u}"
+
+usage() {
+  cat <<'USAGE'
+aaa-music - Macaw0S AAA Music
+
+Commands:
+  scan [dir]       Build playlist from a music directory
+  list             Print current playlist
+  play [query]     Play playlist or first track matching query
+  status           Show app configuration
+  help             Show this help
+USAGE
+}
+
+ensure_playlist_dir() {
+  mkdir -p "$(dirname "$PLAYLIST")"
+}
+
+scan_music() {
+  dir="${1:-$MUSIC_DIR}"
+  [ -d "$dir" ] || { printf 'Music directory not found: %s\n' "$dir" >&2; exit 1; }
+  ensure_playlist_dir
+  find "$dir" -type f \( -iname '*.mp3' -o -iname '*.flac' -o -iname '*.ogg' -o -iname '*.wav' -o -iname '*.m4a' \) | sort > "$PLAYLIST"
+  printf 'AAA Music playlist updated: %s\n' "$PLAYLIST"
+}
+
+list_music() {
+  [ -f "$PLAYLIST" ] || { printf 'Playlist missing. Run: aaa-music scan\n' >&2; exit 1; }
+  nl -ba "$PLAYLIST"
+}
+
+play_music() {
+  [ -f "$PLAYLIST" ] || scan_music "$MUSIC_DIR"
+  query="${1:-}"
+  if [ -n "$query" ]; then
+    track="$(awk -v q="$query" 'BEGIN{IGNORECASE=1} index($0, q) {print; exit}' "$PLAYLIST")"
+    [ -n "$track" ] || { printf 'No track matched: %s\n' "$query" >&2; exit 1; }
+    exec "$PLAYER" "$track"
+  fi
+  exec "$PLAYER" --playlist="$PLAYLIST"
+}
+
+status() {
+  printf 'AAA Music status\n'
+  printf '  music_dir: %s\n' "$MUSIC_DIR"
+  printf '  player: %s\n' "$PLAYER"
+  printf '  playlist: %s\n' "$PLAYLIST"
+  command -v "$PLAYER" >/dev/null 2>&1 && printf '  player_available: yes\n' || printf '  player_available: no\n'
+}
+
+case "${1:-help}" in
+  scan) shift; scan_music "${1:-$MUSIC_DIR}" ;;
+  list) list_music ;;
+  play) shift; play_music "${1:-}" ;;
+  status) status ;;
+  help|--help|-h) usage ;;
+  *) printf 'unknown command: %s\n' "$1" >&2; usage >&2; exit 1 ;;
+esac

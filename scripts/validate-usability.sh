@@ -8,6 +8,7 @@ required_executables=(
   "desktop/aviary-shell/bin/nest-launcher"
   "desktop/aviary-shell/bin/perch-dock"
   "installer/freebsd/postinstall.sh"
+  "apps/aaa-music/bin/aaa-music"
 )
 
 required_files=(
@@ -15,6 +16,9 @@ required_files=(
   "docs/USABILITY_STATUS.md"
   "freebsd-profile/packages.txt"
   "desktop/aviary-shell/share/favorites.conf"
+  "apps/aaa-music/config/aaa-music.conf"
+  "apps/aaa-music/share/applications/aaa-music.desktop"
+  "docs/AAA_MUSIC.md"
 )
 
 for file in "${required_files[@]}"; do

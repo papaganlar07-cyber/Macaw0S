@@ -25,3 +25,5 @@ alacritty
 swaybg
 seatd
 dbus
+mpv
+thunar
