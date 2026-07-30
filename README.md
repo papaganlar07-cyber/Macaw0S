@@ -1,29 +1,29 @@
 # Macaw0S
 
-Macaw0S, Arch Linux tabanlı, modern, profesyonel bir dağıtım oluşturma projesidir.
-Bu repo artık sadece iskelet değil, **ISO build pipeline** da içerir.
+Macaw0S, FreeBSD kernelini birincil hedef alan, profesyonel ve kapalı kaynak ürün geliştirmeye uygun şekilde tasarlanan bir işletim sistemi projesidir.
 
-## Öne Çıkanlar
+## Yeni yön
 
-- Profil tabanlı paket/servis sistemi (`workstation`, `professional`, `security`)
-- ArchISO ile gerçek `.iso` üretimi
-- Markalama (logo) uygulama scripti
-- Kurumsal ve güvenlik odaklı mimari dokümantasyonu
+- Birincil kernel hedefi: **FreeBSD**
+- Lisans hedefi: BSD lisans ekosistemiyle uyumlu, kapalı kaynak bileşenlere izin veren ürün mimarisi
+- Uyumluluk: FreeBSD native paketler, jail/bhyve/QEMU ve DOSBox-X tabanlı DOS modu
+- MS-DOS: Sadece kullanıcı tarafından sağlanan lisanslı imajla; repo içinde MS-DOS binary/imaj dağıtılmaz
 
-## Hızlı Başlangıç
+## Ana dizinler
+
+- `freebsd-profile/`: FreeBSD boot, servis ve paket varsayılanları
+- `compatibility/`: BSD native, DOS ve ağır iş uyumluluk planı
+- `iso-profile/`: Önceki ArchISO denemeleri için korunmuş profil
+- `scripts/`: Build, doğrulama ve yardımcı scriptler
+- `docs/`: Mimari, yol haritası ve FreeBSD geçiş planı
+
+## Doğrulama
 
 ```bash
-chmod +x scripts/*.sh
-./scripts/bootstrap-dev-env.sh
-./scripts/build-profile.sh workstation
-./scripts/build-iso.sh workstation
+./scripts/validate-compatibility.sh
 ```
 
-ISO çıktısı `artifacts/` altına düşer.
+## Detaylar
 
-Detaylar:
-- Mimari: `docs/ARCHITECTURE.md`
-- Yol haritası: `docs/ROADMAP.md`
-- ISO build: `docs/BUILD_ISO.md`
-
-GitHub Actions ArchISO notları: `docs/GITHUB_ACTIONS_ARCHISO.md`
+- FreeBSD geçiş planı: `docs/FREEBSD_PIVOT.md`
+- Uyumluluk katmanı: `compatibility/README.md`
