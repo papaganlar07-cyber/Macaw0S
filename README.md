@@ -18,6 +18,15 @@ Macaw0S, FreeBSD kernelini birincil hedef alan, profesyonel ve kapalı kaynak ü
 - `docs/`: Mimari, yol haritası ve FreeBSD geçiş planı
 
 
+
+## TriCore Orchestrator
+
+Macaw0S artık üçlü güç modeliyle tasarlanır: FreeBSD Core ana sistem, NetBSD Utility Core taşınabilir/az kaynaklı görevler, DOS Personality Core ise legacy DOS işleri için kullanılır. Bu yapı tek bir karışık kernel değil; işleri doğru çalışma katmanına yönlendiren güvenli bir orkestrasyon modelidir.
+
+- TriCore detayları: `docs/TRICORE_ORCHESTRATOR.md`
+- Kernel manifestleri: `kernels/`
+- Orkestrasyon politikası: `orchestrator/tricore-policy.toml`
+
 ## Masaüstü deneyimi
 
 Macaw0S'in özgün masaüstü deneyimi **Aviary Shell** olarak adlandırılır. Wayfire/Sway tabanlıdır, `WingPanel`, `NestLauncher`, `PerchDock` ve `FlightSwitcher` bileşenleriyle Mac kopyası olmayan, kendine has zümrüt-grafit görsel dil kullanır.

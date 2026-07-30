@@ -1,0 +1,15 @@
+[name]
+id = "netbsd-utility-core"
+display = "NetBSD Utility Core"
+role = "portable-services"
+license_family = "bsd-permissive"
+redistributable = true
+
+[features]
+portability = true
+low_resource_targets = true
+experimental_services = true
+
+[boot]
+preferred = false
+loader = "chainload-or-vm"

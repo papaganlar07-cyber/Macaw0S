@@ -1,0 +1,17 @@
+[policy]
+name = "TriCore Orchestrator"
+default_core = "freebsd-core"
+closed_source_friendly = true
+no_forced_open_source_kernel_dependency = true
+
+[routing]
+daily_desktop = "freebsd-core"
+network_storage = "freebsd-core"
+portable_low_resource = "netbsd-utility-core"
+legacy_dos_apps = "dos-personality-core"
+heavy_virtualized_workloads = "freebsd-core:bhyve,qemu,jail"
+
+[safety]
+msdos_images_in_repo = "forbidden"
+unknown_kernel_binary_blobs = "forbidden"
+prefer_user_supplied_licensed_media = true

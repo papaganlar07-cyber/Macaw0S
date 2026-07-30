@@ -1,0 +1,15 @@
+[name]
+id = "dos-personality-core"
+display = "DOS Personality Core"
+role = "legacy-dos-apps"
+license_family = "user-supplied-or-emulated"
+redistributable = false
+
+[features]
+dosbox_x = true
+user_supplied_msdos_image = true
+freedos_optional = true
+
+[policy]
+repository_must_not_ship_msdos_binaries = true
+repository_must_not_ship_disk_images = true

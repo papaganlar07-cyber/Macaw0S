@@ -17,6 +17,9 @@ required_files=(
   "desktop/aviary-shell/themes/macaw-dark/style.css"
   "freebsd-profile/usr/local/etc/xdg/wayfire/wayfire.ini"
   "freebsd-profile/usr/local/etc/xdg/sway/config"
+  "kernels/README.md"
+  "orchestrator/tricore-policy.toml"
+  "docs/TRICORE_ORCHESTRATOR.md"
 )
 
 for file in "${required_files[@]}"; do
