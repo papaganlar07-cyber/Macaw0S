@@ -41,6 +41,11 @@ Macaw0S'in özgün masaüstü deneyimi **Aviary Shell** olarak adlandırılır. 
 Macaw0S henüz günlük ana sistem olarak bitmiş değildir; ama artık FreeBSD profil, Aviary Shell placeholder bileşenleri, post-install staging ve doğrulama scriptleriyle gerçek kullanılabilirliğe yaklaşan test edilebilir bir temel sunar. Detay: `docs/USABILITY_STATUS.md`.
 
 
+
+## macawctl kontrol aracı
+
+`bin/macawctl`, TriCore yönlendirmesini, Aviary favorilerini ve sistem durumunu kontrol etmek için eklenen hafif CLI aracıdır. Detay: `docs/MACAWCTL.md`.
+
 ## Geliştirme komutları
 
 - `make validate`: tüm repo smoke checklerini çalıştırır.

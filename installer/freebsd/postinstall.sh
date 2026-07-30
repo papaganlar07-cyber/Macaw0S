@@ -22,5 +22,6 @@ install_file "$REPO_ROOT/desktop/aviary-shell/share/favorites.conf" "usr/local/s
 install_file "$REPO_ROOT/desktop/aviary-shell/bin/wing-panel" "usr/local/bin/wing-panel" 0755
 install_file "$REPO_ROOT/desktop/aviary-shell/bin/nest-launcher" "usr/local/bin/nest-launcher" 0755
 install_file "$REPO_ROOT/desktop/aviary-shell/bin/perch-dock" "usr/local/bin/perch-dock" 0755
+install_file "$REPO_ROOT/bin/macawctl" "usr/local/bin/macawctl" 0755
 
 printf '[Macaw0S] FreeBSD post-install files staged under %s\n' "$PREFIX"

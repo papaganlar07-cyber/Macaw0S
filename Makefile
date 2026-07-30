@@ -2,9 +2,9 @@ SHELL := /usr/bin/env bash
 PREFIX ?= /usr/local
 STAGE ?= .stage/macaw0s
 
-.PHONY: validate validate-compatibility validate-tricore validate-usability test-aviary install-aviary stage-freebsd clean
+.PHONY: validate validate-compatibility validate-tricore validate-usability test-aviary test-macawctl install-aviary stage-freebsd clean
 
-validate: validate-compatibility validate-tricore validate-usability test-aviary
+validate: validate-compatibility validate-tricore validate-usability test-aviary test-macawctl
 
 validate-compatibility:
 	./scripts/validate-compatibility.sh
@@ -17,6 +17,9 @@ validate-usability:
 
 test-aviary:
 	./scripts/test-aviary-components.sh
+
+test-macawctl:
+	./scripts/test-macawctl.sh
 
 install-aviary:
 	./scripts/install-aviary-desktop.sh "$(PREFIX)"

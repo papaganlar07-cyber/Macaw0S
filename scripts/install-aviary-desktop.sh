@@ -13,5 +13,6 @@ install -Dm644 "$ROOT_DIR/freebsd-profile/usr/local/etc/xdg/sway/config" "$PREFI
 install -Dm755 "$ROOT_DIR/desktop/aviary-shell/bin/wing-panel" "$PREFIX/bin/wing-panel"
 install -Dm755 "$ROOT_DIR/desktop/aviary-shell/bin/nest-launcher" "$PREFIX/bin/nest-launcher"
 install -Dm755 "$ROOT_DIR/desktop/aviary-shell/bin/perch-dock" "$PREFIX/bin/perch-dock"
+install -Dm755 "$ROOT_DIR/bin/macawctl" "$PREFIX/bin/macawctl"
 
 echo "[Macaw0S] Aviary Shell dosyaları kuruldu: $PREFIX"

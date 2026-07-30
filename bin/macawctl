@@ -1,0 +1,69 @@
+#!/usr/bin/env sh
+set -eu
+
+ROOT_DIR="${MACAW0S_ROOT:-$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)}"
+POLICY="$ROOT_DIR/orchestrator/tricore-policy.toml"
+FAVORITES="$ROOT_DIR/desktop/aviary-shell/share/favorites.conf"
+
+usage() {
+  cat <<'USAGE'
+macawctl - Macaw0S control utility
+
+Commands:
+  status              Show project/runtime status summary
+  cores               List TriCore kernel personalities
+  route <workload>    Show preferred core for a workload
+  favorites           List Aviary Shell favorites
+  help                Show this help
+
+Workloads:
+  daily-desktop, network-storage, portable-low-resource, legacy-dos-apps, heavy-workloads
+USAGE
+}
+
+route_workload() {
+  case "$1" in
+    daily-desktop) printf 'freebsd-core\n' ;;
+    network-storage) printf 'freebsd-core\n' ;;
+    portable-low-resource) printf 'netbsd-utility-core\n' ;;
+    legacy-dos-apps) printf 'dos-personality-core\n' ;;
+    heavy-workloads) printf 'freebsd-core:bhyve,qemu,jail\n' ;;
+    *) printf 'unknown workload: %s\n' "$1" >&2; return 1 ;;
+  esac
+}
+
+status() {
+  printf 'Macaw0S status\n'
+  printf '  root: %s\n' "$ROOT_DIR"
+  printf '  policy: %s\n' "$POLICY"
+  printf '  desktop: Aviary Shell\n'
+  printf '  default core: freebsd-core\n'
+  [ -f "$POLICY" ] && printf '  tricore policy: present\n' || printf '  tricore policy: missing\n'
+  [ -f "$FAVORITES" ] && printf '  favorites: present\n' || printf '  favorites: missing\n'
+}
+
+cores() {
+  cat <<'CORES'
+freebsd-core        primary workstation, ZFS, jail, bhyve, networking
+netbsd-utility-core portable/low-resource services and experiments
+dos-personality-core legacy DOS apps through DOSBox-X or user-supplied MS-DOS media
+CORES
+}
+
+favorites() {
+  if [ ! -f "$FAVORITES" ]; then
+    printf 'favorites file missing: %s\n' "$FAVORITES" >&2
+    return 1
+  fi
+  sed -n '/^[[:space:]]*#/d; /^[[:space:]]*$/d; s/=.*$//p' "$FAVORITES"
+}
+
+cmd="${1:-help}"
+case "$cmd" in
+  status) status ;;
+  cores) cores ;;
+  route) shift; route_workload "${1:-}" ;;
+  favorites) favorites ;;
+  help|--help|-h) usage ;;
+  *) printf 'unknown command: %s\n' "$cmd" >&2; usage >&2; exit 1 ;;
+esac
