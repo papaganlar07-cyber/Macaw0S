@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Aviary Settings
+Comment=Configure Macaw0S Aviary Shell preferences
+Exec=aviary-settings status
+Terminal=true
+Categories=Settings;DesktopSettings;
+StartupNotify=false

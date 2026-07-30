@@ -9,6 +9,7 @@ required_executables=(
   "desktop/aviary-shell/bin/perch-dock"
   "installer/freebsd/postinstall.sh"
   "apps/aaa-music/bin/aaa-music"
+  "apps/aviary-settings/bin/aviary-settings"
 )
 
 required_files=(
@@ -19,6 +20,8 @@ required_files=(
   "apps/aaa-music/config/aaa-music.conf"
   "apps/aaa-music/share/applications/aaa-music.desktop"
   "docs/AAA_MUSIC.md"
+  "apps/aviary-settings/share/applications/aviary-settings.desktop"
+  "docs/AVIARY_SETTINGS.md"
 )
 
 for file in "${required_files[@]}"; do

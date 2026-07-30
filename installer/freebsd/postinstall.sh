@@ -26,5 +26,7 @@ install_file "$REPO_ROOT/bin/macawctl" "usr/local/bin/macawctl" 0755
 install_file "$REPO_ROOT/apps/aaa-music/bin/aaa-music" "usr/local/bin/aaa-music" 0755
 install_file "$REPO_ROOT/apps/aaa-music/config/aaa-music.conf" "usr/local/share/macaw0s/aaa-music.conf"
 install_file "$REPO_ROOT/apps/aaa-music/share/applications/aaa-music.desktop" "usr/local/share/applications/aaa-music.desktop"
+install_file "$REPO_ROOT/apps/aviary-settings/bin/aviary-settings" "usr/local/bin/aviary-settings" 0755
+install_file "$REPO_ROOT/apps/aviary-settings/share/applications/aviary-settings.desktop" "usr/local/share/applications/aviary-settings.desktop"
 
 printf '[Macaw0S] FreeBSD post-install files staged under %s\n' "$PREFIX"

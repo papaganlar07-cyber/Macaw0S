@@ -1,0 +1,97 @@
+#!/usr/bin/env sh
+set -eu
+
+CONFIG_DIR="${AVIARY_CONFIG_DIR:-$HOME/.config/macaw0s}"
+SETTINGS_FILE="$CONFIG_DIR/settings.conf"
+FAVORITES_FILE="${MACAW0S_FAVORITES:-$HOME/.config/macaw0s/favorites.conf}"
+DEFAULT_THEME="macaw-dark"
+
+usage() {
+  cat <<'USAGE'
+aviary-settings - Macaw0S settings utility
+
+Commands:
+  init                         Create user settings files
+  get theme                    Print current theme
+  set theme <name>             Set current theme
+  favorites list               List user favorites
+  favorites add <label> <cmd>  Add or replace a favorite
+  status                       Show settings paths
+  help                         Show this help
+USAGE
+}
+
+ensure_config() {
+  mkdir -p "$CONFIG_DIR"
+  if [ ! -f "$SETTINGS_FILE" ]; then
+    printf 'theme=%s\naccent=emerald\n' "$DEFAULT_THEME" > "$SETTINGS_FILE"
+  fi
+  if [ ! -f "$FAVORITES_FILE" ]; then
+    cat > "$FAVORITES_FILE" <<'FAVS'
+Terminal=alacritty
+Browser=firefox
+AAA Music=aaa-music play
+FAVS
+  fi
+}
+
+get_value() {
+  key="$1"
+  ensure_config
+  awk -F= -v key="$key" '$1 == key {print substr($0, index($0, "=") + 1); found=1; exit} END {if (!found) exit 1}' "$SETTINGS_FILE"
+}
+
+set_value() {
+  key="$1"
+  value="$2"
+  ensure_config
+  tmp="$SETTINGS_FILE.tmp"
+  awk -F= -v key="$key" -v value="$value" 'BEGIN{done=0} $1 == key {$0=key "=" value; done=1} {print} END{if (!done) print key "=" value}' "$SETTINGS_FILE" > "$tmp"
+  mv "$tmp" "$SETTINGS_FILE"
+}
+
+favorites_list() {
+  ensure_config
+  sed -n '/^[[:space:]]*#/d; /^[[:space:]]*$/d; s/=.*$//p' "$FAVORITES_FILE"
+}
+
+favorites_add() {
+  label="$1"
+  command="$2"
+  ensure_config
+  tmp="$FAVORITES_FILE.tmp"
+  awk -F= -v key="$label" '$1 != key {print}' "$FAVORITES_FILE" > "$tmp"
+  printf '%s=%s\n' "$label" "$command" >> "$tmp"
+  mv "$tmp" "$FAVORITES_FILE"
+}
+
+status() {
+  ensure_config
+  printf 'Aviary Settings status\n'
+  printf '  config_dir: %s\n' "$CONFIG_DIR"
+  printf '  settings: %s\n' "$SETTINGS_FILE"
+  printf '  favorites: %s\n' "$FAVORITES_FILE"
+  printf '  theme: %s\n' "$(get_value theme)"
+}
+
+case "${1:-help}" in
+  init) ensure_config; printf 'Aviary settings initialized: %s\n' "$CONFIG_DIR" ;;
+  get)
+    [ "${2:-}" = theme ] || { usage >&2; exit 1; }
+    get_value theme
+    ;;
+  set)
+    [ "${2:-}" = theme ] && [ -n "${3:-}" ] || { usage >&2; exit 1; }
+    set_value theme "$3"
+    ;;
+  favorites)
+    case "${2:-}" in
+      list) favorites_list ;;
+      add) [ -n "${3:-}" ] && [ -n "${4:-}" ] || { usage >&2; exit 1; }; favorites_add "$3" "$4" ;;
+      *) usage >&2; exit 1 ;;
+    esac
+    ;;
+  status) status ;;
+  help|--help|-h) usage ;;
+  *) printf 'unknown command: %s\n' "$1" >&2; usage >&2; exit 1 ;;
+esac

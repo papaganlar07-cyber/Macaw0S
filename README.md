@@ -43,6 +43,11 @@ Macaw0S henüz günlük ana sistem olarak bitmiş değildir; ama artık FreeBSD 
 
 
 
+
+## Aviary Settings
+
+Aviary Settings, tema ve favori yönetimi için eklenen hafif ayar aracıdır. İlk sürüm CLI tabanlıdır ve ileride grafik ayarlar merkezinin temelini oluşturur. Detay: `docs/AVIARY_SETTINGS.md`.
+
 ## AAA Music
 
 Macaw0S artık günlük kullanım için hafif bir müzik uygulaması içerir: `apps/aaa-music/bin/aaa-music`. Müzik klasörünü tarar, playlist oluşturur ve `mpv` ile çalar. Detay: `docs/AAA_MUSIC.md`.
