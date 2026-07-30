@@ -1,4 +1,21 @@
 #!/usr/bin/env sh
-# Placeholder executable for the future native WingPanel.
-# Keeps sessions testable until the real panel is implemented.
-exec sh -c 'while :; do printf "Macaw0S WingPanel placeholder\n"; sleep 3600; done'
+set -eu
+
+print_panel_line() {
+  now="$(date '+%Y-%m-%d %H:%M')"
+  host="$(hostname 2>/dev/null || printf 'macaw0s')"
+  load="$(uptime 2>/dev/null | sed 's/^.*load averages*: //' || printf 'n/a')"
+  printf 'Macaw0S WingPanel | %s | %s | load %s\n' "$host" "$now" "$load"
+}
+
+case "${1:-}" in
+  --once)
+    print_panel_line
+    ;;
+  *)
+    while :; do
+      print_panel_line
+      sleep "${WING_PANEL_INTERVAL:-30}"
+    done
+    ;;
+esac

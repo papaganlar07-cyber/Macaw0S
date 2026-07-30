@@ -18,6 +18,7 @@ install_file "$REPO_ROOT/freebsd-profile/usr/local/etc/xdg/sway/config" "usr/loc
 install_file "$REPO_ROOT/desktop/aviary-shell/config/aviary-session.conf" "usr/local/share/macaw0s/aviary-session.conf"
 install_file "$REPO_ROOT/desktop/aviary-shell/themes/macaw-dark/colors.conf" "usr/local/share/macaw0s/themes/macaw-dark/colors.conf"
 install_file "$REPO_ROOT/desktop/aviary-shell/themes/macaw-dark/style.css" "usr/local/share/macaw0s/themes/macaw-dark/style.css"
+install_file "$REPO_ROOT/desktop/aviary-shell/share/favorites.conf" "usr/local/share/macaw0s/favorites.conf"
 install_file "$REPO_ROOT/desktop/aviary-shell/bin/wing-panel" "usr/local/bin/wing-panel" 0755
 install_file "$REPO_ROOT/desktop/aviary-shell/bin/nest-launcher" "usr/local/bin/nest-launcher" 0755
 install_file "$REPO_ROOT/desktop/aviary-shell/bin/perch-dock" "usr/local/bin/perch-dock" 0755

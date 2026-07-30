@@ -1,3 +1,24 @@
 #!/usr/bin/env sh
-# Placeholder executable for the future native PerchDock.
-exec sh -c 'while :; do printf "Macaw0S PerchDock placeholder\n"; sleep 3600; done'
+set -eu
+
+FAVORITES="${MACAW0S_FAVORITES:-/usr/local/share/macaw0s/favorites.conf}"
+
+render() {
+  if [ -f "$FAVORITES" ]; then
+    awk -F= '/^[[:space:]]*#/ {next} /^[[:space:]]*$/ {next} {printf "[%s] ", $1} END {printf "\n"}' "$FAVORITES"
+  else
+    printf '[Terminal] [Browser] [Editor]\n'
+  fi
+}
+
+case "${1:-}" in
+  --once)
+    render
+    ;;
+  *)
+    while :; do
+      render
+      sleep "${PERCH_DOCK_INTERVAL:-60}"
+    done
+    ;;
+esac

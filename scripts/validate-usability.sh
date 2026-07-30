@@ -14,6 +14,7 @@ required_files=(
   "installer/freebsd/install.conf"
   "docs/USABILITY_STATUS.md"
   "freebsd-profile/packages.txt"
+  "desktop/aviary-shell/share/favorites.conf"
 )
 
 for file in "${required_files[@]}"; do

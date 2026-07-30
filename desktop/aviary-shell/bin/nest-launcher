@@ -1,7 +1,46 @@
 #!/usr/bin/env sh
-# Minimal launcher placeholder. In --daemon mode it stays alive for compositor autostart.
+set -eu
+
+FAVORITES="${MACAW0S_FAVORITES:-/usr/local/share/macaw0s/favorites.conf}"
+
+show_entries() {
+  if [ -f "$FAVORITES" ]; then
+    sed -n '/^[[:space:]]*#/d; /^[[:space:]]*$/d; s/=.*$//p' "$FAVORITES"
+  else
+    printf 'Terminal\nBrowser\nEditor\n'
+  fi
+}
+
+command_for() {
+  label="$1"
+  if [ -f "$FAVORITES" ]; then
+    awk -F= -v key="$label" '$1 == key {print substr($0, index($0, "=") + 1); exit}' "$FAVORITES"
+  fi
+}
+
 case "${1:-}" in
-  --daemon) exec sh -c 'while :; do sleep 3600; done' ;;
-  --show) command -v rofi >/dev/null 2>&1 && exec rofi -show drun || exec sh -c 'printf "NestLauncher placeholder: install rofi or implement native launcher.\n"' ;;
-  *) exec sh -c 'printf "NestLauncher placeholder\n"' ;;
+  --daemon)
+    while :; do sleep 3600; done
+    ;;
+  --list)
+    show_entries
+    ;;
+  --show)
+    if command -v rofi >/dev/null 2>&1; then
+      choice="$(show_entries | rofi -dmenu -p 'Nest')"
+      cmd="$(command_for "$choice")"
+      [ -n "$cmd" ] && exec sh -c "$cmd"
+    else
+      show_entries
+    fi
+    ;;
+  --run)
+    shift
+    cmd="$(command_for "${1:-}")"
+    [ -n "$cmd" ] || { printf 'Unknown favorite: %s\n' "${1:-}" >&2; exit 1; }
+    exec sh -c "$cmd"
+    ;;
+  *)
+    show_entries
+    ;;
 esac
