@@ -22,3 +22,7 @@ kernels/**/media/
 .stage/
 
 build/
+
+kernel.elf
+boot.o
+kernel.o

@@ -1,10 +1,30 @@
 SHELL := /usr/bin/env bash
 CC ?= cc
 CFLAGS ?= -std=c99 -Wall -Wextra -Werror -O2
+KERNEL_CFLAGS ?= -m32 -ffreestanding -fno-pic -fno-pie -fno-stack-protector -nostdlib -Wall -Wextra -O2
+KERNEL_LDFLAGS ?= -m32 -T linker.ld -nostdlib -no-pie -Wl,--build-id=none
+QEMU ?= qemu-system-i386
 PREFIX ?= /usr/local
 STAGE ?= .stage/macaw0s
 
-.PHONY: validate validate-compatibility validate-tricore validate-usability test-aviary test-macawctl test-aaa-music test-aviary-settings test-quick-notes native test-native install-aviary daily-readiness stage-freebsd clean
+all: kernel
+
+kernel: kernel.elf
+
+kernel.elf: boot.o kernel.o linker.ld
+	$(CC) $(KERNEL_LDFLAGS) -o $@ boot.o kernel.o
+
+boot.o: boot.asm
+	$(CC) $(KERNEL_CFLAGS) -x assembler-with-cpp -c $< -o $@
+
+kernel.o: kernel.c
+	$(CC) $(KERNEL_CFLAGS) -c $< -o $@
+
+run: kernel.elf
+	# Windows QEMU example: QEMU=/c/Program\ Files/qemu/qemu-system-i386 make run
+	$(QEMU) -kernel kernel.elf -m 128M -serial stdio
+
+.PHONY: all kernel run validate validate-compatibility validate-tricore validate-usability test-aviary test-macawctl test-aaa-music test-aviary-settings test-quick-notes native test-native install-aviary daily-readiness stage-freebsd clean
 
 validate: native validate-compatibility validate-tricore validate-usability test-aviary test-macawctl test-aaa-music test-aviary-settings test-quick-notes test-native
 
@@ -57,4 +77,4 @@ stage-freebsd:
 	./scripts/install-aviary-desktop.sh "$(STAGE)/usr/local"
 
 clean:
-	rm -rf .stage .mkarchiso-work build .build-*-packages.txt .build-*-services.txt
+	rm -rf .stage .mkarchiso-work build kernel.elf boot.o kernel.o .build-*-packages.txt .build-*-services.txt
