@@ -28,5 +28,7 @@ install_file "$REPO_ROOT/apps/aaa-music/config/aaa-music.conf" "usr/local/share/
 install_file "$REPO_ROOT/apps/aaa-music/share/applications/aaa-music.desktop" "usr/local/share/applications/aaa-music.desktop"
 install_file "$REPO_ROOT/apps/aviary-settings/bin/aviary-settings" "usr/local/bin/aviary-settings" 0755
 install_file "$REPO_ROOT/apps/aviary-settings/share/applications/aviary-settings.desktop" "usr/local/share/applications/aviary-settings.desktop"
+install_file "$REPO_ROOT/apps/quick-notes/bin/quick-notes" "usr/local/bin/quick-notes" 0755
+install_file "$REPO_ROOT/apps/quick-notes/share/applications/quick-notes.desktop" "usr/local/share/applications/quick-notes.desktop"
 
 printf '[Macaw0S] FreeBSD post-install files staged under %s\n' "$PREFIX"

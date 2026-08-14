@@ -44,6 +44,15 @@ Macaw0S henüz günlük ana sistem olarak bitmiş değildir; ama artık FreeBSD 
 
 
 
+
+## Quick Notes
+
+Quick Notes, günlük not alma için eklenen küçük Markdown not aracıdır. Detay: `docs/QUICK_NOTES.md`.
+
+## Günlük kullanım kapısı
+
+Macaw0S günlük ana sistem olarak etiketlenmeden önce `docs/DAILY_READINESS.md` içindeki kapılar tamamlanmalıdır. Dördüncü kernel fikri teknik olarak orkestrasyon/VM/chainload şeklinde eklenebilir; fakat günlük kullanım hedefi için şimdilik kapsam dışı bırakıldı.
+
 ## Aviary Settings
 
 Aviary Settings, tema ve favori yönetimi için eklenen hafif ayar aracıdır. İlk sürüm CLI tabanlıdır ve ileride grafik ayarlar merkezinin temelini oluşturur. Detay: `docs/AVIARY_SETTINGS.md`.

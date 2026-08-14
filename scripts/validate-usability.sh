@@ -10,6 +10,7 @@ required_executables=(
   "installer/freebsd/postinstall.sh"
   "apps/aaa-music/bin/aaa-music"
   "apps/aviary-settings/bin/aviary-settings"
+  "apps/quick-notes/bin/quick-notes"
 )
 
 required_files=(
@@ -22,6 +23,9 @@ required_files=(
   "docs/AAA_MUSIC.md"
   "apps/aviary-settings/share/applications/aviary-settings.desktop"
   "docs/AVIARY_SETTINGS.md"
+  "apps/quick-notes/share/applications/quick-notes.desktop"
+  "docs/QUICK_NOTES.md"
+  "docs/DAILY_READINESS.md"
 )
 
 for file in "${required_files[@]}"; do

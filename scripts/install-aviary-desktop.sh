@@ -19,5 +19,7 @@ install -Dm644 "$ROOT_DIR/apps/aaa-music/config/aaa-music.conf" "$PREFIX/share/m
 install -Dm644 "$ROOT_DIR/apps/aaa-music/share/applications/aaa-music.desktop" "$PREFIX/share/applications/aaa-music.desktop"
 install -Dm755 "$ROOT_DIR/apps/aviary-settings/bin/aviary-settings" "$PREFIX/bin/aviary-settings"
 install -Dm644 "$ROOT_DIR/apps/aviary-settings/share/applications/aviary-settings.desktop" "$PREFIX/share/applications/aviary-settings.desktop"
+install -Dm755 "$ROOT_DIR/apps/quick-notes/bin/quick-notes" "$PREFIX/bin/quick-notes"
+install -Dm644 "$ROOT_DIR/apps/quick-notes/share/applications/quick-notes.desktop" "$PREFIX/share/applications/quick-notes.desktop"
 
 echo "[Macaw0S] Aviary Shell dosyaları kuruldu: $PREFIX"

@@ -1,0 +1,75 @@
+#!/usr/bin/env sh
+set -eu
+
+NOTES_DIR="${MACAW0S_NOTES_DIR:-$HOME/Notes/Macaw0S}"
+EDITOR_CMD="${EDITOR:-vi}"
+
+usage() {
+  cat <<'USAGE'
+quick-notes - Macaw0S simple notes utility
+
+Commands:
+  new <title>       Create a timestamped note
+  list              List notes
+  show <file>       Print a note by filename
+  edit <file>       Edit a note
+  path              Print notes directory
+  help              Show this help
+USAGE
+}
+
+slugify() {
+  printf '%s' "$1" | tr '[:upper:]' '[:lower:]' | tr -cs '[:alnum:]' '-' | sed 's/^-//; s/-$//'
+}
+
+ensure_notes_dir() {
+  mkdir -p "$NOTES_DIR"
+}
+
+new_note() {
+  title="${1:-Untitled}"
+  ensure_notes_dir
+  slug="$(slugify "$title")"
+  stamp="$(date '+%Y%m%d-%H%M%S')"
+  file="$NOTES_DIR/${stamp}-${slug:-note}.md"
+  {
+    printf '# %s\n\n' "$title"
+    printf '%s\n\n' "- Created: $(date '+%Y-%m-%d %H:%M:%S')"
+  } > "$file"
+  printf '%s\n' "$file"
+}
+
+list_notes() {
+  ensure_notes_dir
+  find "$NOTES_DIR" -maxdepth 1 -type f -name '*.md' | sort
+}
+
+resolve_note() {
+  name="$1"
+  case "$name" in
+    /*) printf '%s\n' "$name" ;;
+    *) printf '%s/%s\n' "$NOTES_DIR" "$name" ;;
+  esac
+}
+
+show_note() {
+  file="$(resolve_note "$1")"
+  [ -f "$file" ] || { printf 'Note not found: %s\n' "$file" >&2; exit 1; }
+  cat "$file"
+}
+
+edit_note() {
+  file="$(resolve_note "$1")"
+  [ -f "$file" ] || { printf 'Note not found: %s\n' "$file" >&2; exit 1; }
+  exec "$EDITOR_CMD" "$file"
+}
+
+case "${1:-help}" in
+  new) shift; new_note "${*:-Untitled}" ;;
+  list) list_notes ;;
+  show) shift; [ -n "${1:-}" ] || { usage >&2; exit 1; }; show_note "$1" ;;
+  edit) shift; [ -n "${1:-}" ] || { usage >&2; exit 1; }; edit_note "$1" ;;
+  path) ensure_notes_dir; printf '%s\n' "$NOTES_DIR" ;;
+  help|--help|-h) usage ;;
+  *) printf 'unknown command: %s\n' "$1" >&2; usage >&2; exit 1 ;;
+esac

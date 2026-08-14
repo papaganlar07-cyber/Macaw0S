@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Quick Notes
+Comment=Create and manage Macaw0S markdown notes
+Exec=quick-notes list
+Terminal=true
+Categories=Office;TextEditor;
+StartupNotify=false
