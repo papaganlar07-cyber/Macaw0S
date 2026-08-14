@@ -11,13 +11,16 @@ all: kernel
 
 kernel: kernel.elf
 
-kernel.elf: boot.o kernel.o linker.ld
-	$(CC) $(KERNEL_LDFLAGS) -o $@ boot.o kernel.o
+kernel.elf: boot.o kernel.o ps2_mouse.o linker.ld
+	$(CC) $(KERNEL_LDFLAGS) -o $@ boot.o kernel.o ps2_mouse.o
 
 boot.o: boot.asm
 	$(CC) $(KERNEL_CFLAGS) -x assembler-with-cpp -c $< -o $@
 
 kernel.o: kernel.c
+	$(CC) $(KERNEL_CFLAGS) -c $< -o $@
+
+ps2_mouse.o: ps2_mouse.c
 	$(CC) $(KERNEL_CFLAGS) -c $< -o $@
 
 run: kernel.elf
@@ -77,4 +80,4 @@ stage-freebsd:
 	./scripts/install-aviary-desktop.sh "$(STAGE)/usr/local"
 
 clean:
-	rm -rf .stage .mkarchiso-work build kernel.elf boot.o kernel.o .build-*-packages.txt .build-*-services.txt
+	rm -rf .stage .mkarchiso-work build kernel.elf boot.o kernel.o ps2_mouse.o .build-*-packages.txt .build-*-services.txt

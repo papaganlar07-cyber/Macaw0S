@@ -26,3 +26,5 @@ build/
 kernel.elf
 boot.o
 kernel.o
+ps2_mouse.o
+artifacts/*.log

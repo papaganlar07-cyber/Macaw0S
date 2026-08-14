@@ -26,6 +26,43 @@ struct framebuffer {
 static volatile u16 *const vga = (u16 *)0xB8000;
 static struct framebuffer fb;
 
+void ps2_mouse_init(void);
+int ps2_mouse_poll(void);
+int ps2_mouse_x(void);
+int ps2_mouse_y(void);
+
+static inline void serial_out(u16 port, u8 value) {
+    __asm__ volatile ("outb %0, %1" : : "a"(value), "Nd"(port));
+}
+
+static inline u8 serial_in(u16 port) {
+    u8 value;
+    __asm__ volatile ("inb %1, %0" : "=a"(value) : "Nd"(port));
+    return value;
+}
+
+static void serial_init(void) {
+    serial_out(0x3F8 + 1, 0x00);
+    serial_out(0x3F8 + 3, 0x80);
+    serial_out(0x3F8 + 0, 0x03);
+    serial_out(0x3F8 + 1, 0x00);
+    serial_out(0x3F8 + 3, 0x03);
+    serial_out(0x3F8 + 2, 0xC7);
+    serial_out(0x3F8 + 4, 0x0B);
+}
+
+static void serial_write_char(char c) {
+    while ((serial_in(0x3F8 + 5) & 0x20) == 0) {
+    }
+    serial_out(0x3F8, (u8)c);
+}
+
+static void serial_write(const char *s) {
+    while (*s) {
+        serial_write_char(*s++);
+    }
+}
+
 static u32 align8(u32 value) {
     return (value + 7U) & ~7U;
 }
@@ -144,7 +181,13 @@ static void clear_framebuffer(u32 color) {
     draw_rect(0, 0, fb.width, fb.height, color);
 }
 
+static void draw_cursor(u32 x, u32 y, u32 color) {
+    draw_rect(x, y, 8, 8, color);
+}
+
 void kmain(u32 magic, u32 mb2_addr) {
+    serial_init();
+    serial_write("ParrotOS Macaw0S kernel booted\n");
     vga_puts("Macaw0S kernel starting...");
     parse_mb2(magic, mb2_addr);
     clear_framebuffer(0xFF071B1A);
@@ -152,7 +195,18 @@ void kmain(u32 magic, u32 mb2_addr) {
     draw_rect(40, 40, 224, 104, 0xFF153A34);
     draw_parrot_pixelized(96, 72, 8);
 
+    ps2_mouse_init();
+    u32 cursor_x = (u32)ps2_mouse_x();
+    u32 cursor_y = (u32)ps2_mouse_y();
+    draw_cursor(cursor_x, cursor_y, 0xFFFFFFFF);
+
     for (;;) {
-        __asm__ volatile ("hlt");
+        if (ps2_mouse_poll()) {
+            draw_cursor(cursor_x, cursor_y, 0xFF071B1A);
+            cursor_x = (u32)ps2_mouse_x();
+            cursor_y = (u32)ps2_mouse_y();
+            draw_cursor(cursor_x, cursor_y, 0xFFFFFFFF);
+        }
+        __asm__ volatile ("pause");
     }
 }
