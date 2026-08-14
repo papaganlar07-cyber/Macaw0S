@@ -30,5 +30,11 @@ install_file "$REPO_ROOT/apps/aviary-settings/bin/aviary-settings" "usr/local/bi
 install_file "$REPO_ROOT/apps/aviary-settings/share/applications/aviary-settings.desktop" "usr/local/share/applications/aviary-settings.desktop"
 install_file "$REPO_ROOT/apps/quick-notes/bin/quick-notes" "usr/local/bin/quick-notes" 0755
 install_file "$REPO_ROOT/apps/quick-notes/share/applications/quick-notes.desktop" "usr/local/share/applications/quick-notes.desktop"
+if [ -x "$REPO_ROOT/build/wing-panel" ]; then
+  install_file "$REPO_ROOT/build/wing-panel" "usr/local/bin/wing-panel" 0755
+fi
+if [ -x "$REPO_ROOT/build/macawctl" ]; then
+  install_file "$REPO_ROOT/build/macawctl" "usr/local/bin/macawctl" 0755
+fi
 
 printf '[Macaw0S] FreeBSD post-install files staged under %s\n' "$PREFIX"

@@ -20,3 +20,5 @@ kernels/**/media/
 *.swp
 
 .stage/
+
+build/

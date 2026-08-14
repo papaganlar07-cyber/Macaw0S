@@ -1,10 +1,12 @@
 SHELL := /usr/bin/env bash
+CC ?= cc
+CFLAGS ?= -std=c99 -Wall -Wextra -Werror -O2
 PREFIX ?= /usr/local
 STAGE ?= .stage/macaw0s
 
-.PHONY: validate validate-compatibility validate-tricore validate-usability test-aviary test-macawctl test-aaa-music test-aviary-settings test-quick-notes install-aviary daily-readiness stage-freebsd clean
+.PHONY: validate validate-compatibility validate-tricore validate-usability test-aviary test-macawctl test-aaa-music test-aviary-settings test-quick-notes native test-native install-aviary daily-readiness stage-freebsd clean
 
-validate: validate-compatibility validate-tricore validate-usability test-aviary test-macawctl test-aaa-music test-aviary-settings test-quick-notes
+validate: native validate-compatibility validate-tricore validate-usability test-aviary test-macawctl test-aaa-music test-aviary-settings test-quick-notes test-native
 
 validate-compatibility:
 	./scripts/validate-compatibility.sh
@@ -33,6 +35,19 @@ test-quick-notes:
 daily-readiness:
 	./scripts/daily-readiness.sh
 
+native: build/wing-panel build/macawctl
+
+build/wing-panel: src/aviary/wing-panel.c
+	mkdir -p build
+	$(CC) $(CFLAGS) -o $@ $<
+
+build/macawctl: src/macawctl/macawctl.c
+	mkdir -p build
+	$(CC) $(CFLAGS) -o $@ $<
+
+test-native: native
+	./scripts/test-native-components.sh
+
 install-aviary:
 	./scripts/install-aviary-desktop.sh "$(PREFIX)"
 
@@ -42,4 +57,4 @@ stage-freebsd:
 	./scripts/install-aviary-desktop.sh "$(STAGE)/usr/local"
 
 clean:
-	rm -rf .stage .mkarchiso-work .build-*-packages.txt .build-*-services.txt
+	rm -rf .stage .mkarchiso-work build .build-*-packages.txt .build-*-services.txt

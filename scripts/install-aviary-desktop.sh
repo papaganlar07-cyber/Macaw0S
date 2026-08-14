@@ -21,5 +21,11 @@ install -Dm755 "$ROOT_DIR/apps/aviary-settings/bin/aviary-settings" "$PREFIX/bin
 install -Dm644 "$ROOT_DIR/apps/aviary-settings/share/applications/aviary-settings.desktop" "$PREFIX/share/applications/aviary-settings.desktop"
 install -Dm755 "$ROOT_DIR/apps/quick-notes/bin/quick-notes" "$PREFIX/bin/quick-notes"
 install -Dm644 "$ROOT_DIR/apps/quick-notes/share/applications/quick-notes.desktop" "$PREFIX/share/applications/quick-notes.desktop"
+if [ -x "$ROOT_DIR/build/wing-panel" ]; then
+  install -Dm755 "$ROOT_DIR/build/wing-panel" "$PREFIX/bin/wing-panel"
+fi
+if [ -x "$ROOT_DIR/build/macawctl" ]; then
+  install -Dm755 "$ROOT_DIR/build/macawctl" "$PREFIX/bin/macawctl"
+fi
 
 echo "[Macaw0S] Aviary Shell dosyaları kuruldu: $PREFIX"

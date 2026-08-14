@@ -49,6 +49,11 @@ Macaw0S henüz günlük ana sistem olarak bitmiş değildir; ama artık FreeBSD 
 
 Quick Notes, günlük not alma için eklenen küçük Markdown not aracıdır. Detay: `docs/QUICK_NOTES.md`.
 
+
+## Native C yönü
+
+Shell scriptler hızlı prototip içindir; kandırmamak için net yazıyorum: gerçek OS hedefinde temel bileşenlerin C gibi native dillerle yazılması gerekir. Bu yüzden `src/aviary/wing-panel.c` ve `src/macawctl/macawctl.c` eklendi. Derleme: `make native`. Detay: `docs/NATIVE_CODE_PLAN.md`.
+
 ## Günlük kullanım kapısı
 
 Macaw0S günlük ana sistem olarak etiketlenmeden önce `docs/DAILY_READINESS.md` içindeki kapılar tamamlanmalıdır. Dördüncü kernel fikri teknik olarak orkestrasyon/VM/chainload şeklinde eklenebilir; fakat günlük kullanım hedefi için şimdilik kapsam dışı bırakıldı.
